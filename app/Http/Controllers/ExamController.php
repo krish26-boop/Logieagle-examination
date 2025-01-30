@@ -89,13 +89,13 @@ class ExamController extends Controller
     }
 
     public function uploadMark() {
-       return view('uploadMark');
+       return view('uploadMarks.index');
     }
 
     public function uploadMarks(Request $request) {
-        // $request->validate([
-        //     'file' => 'required|mimes:xlsx,xls,csv|max:2048', 
-        // ]);
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv|max:2048', 
+        ]);
 
         try {
             $file = $request->file('file');
