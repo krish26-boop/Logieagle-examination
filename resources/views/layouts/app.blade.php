@@ -84,6 +84,17 @@
                         fetchExams();
                         $('#examForm')[0].reset();
                         $('#examId').val('');
+                    },
+                    error: function(xhr) {
+                        $('.error').remove();
+                        if (xhr.status === 422) {
+                            const errors = xhr.responseJSON.errors;
+                            $.each(errors, function(field, messages) {
+                                const input = $('[name=' + field + ']');
+                                const errorMessage = $('<span class="error" style="color:red;">' + messages[0] + '</span>');
+                                input.after(errorMessage);
+                            });
+                        }
                     }
                 });
             });
@@ -103,6 +114,17 @@
                         fetchGrades();
                         $('#gradeForm')[0].reset();
                         $('#gradeId').val('');
+                    },
+                    error: function(xhr) {
+                        $('.error').remove();
+                        if (xhr.status === 422) {
+                            const errors = xhr.responseJSON.errors;
+                            $.each(errors, function(field, messages) {
+                                const input = $('[name=' + field + ']');
+                                const errorMessage = $('<span class="error" style="color:red;">' + messages[0] + '</span>');
+                                input.after(errorMessage);
+                            });
+                        }
                     }
                 });
             });
@@ -174,7 +196,7 @@
             var formData = new FormData(this);
 
             $.ajax({
-                url: '{{ route("uploadMarks") }}', 
+                url: '{{ route("uploadMarks") }}',
                 type: 'POST',
                 data: formData,
                 processData: false,
@@ -190,4 +212,5 @@
         });
     </script>
 </body>
+
 </html>

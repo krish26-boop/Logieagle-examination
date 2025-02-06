@@ -33,7 +33,7 @@ class ExamController extends Controller
     {
         //
         $request->validate([
-            'exam_name' => 'required|string',
+            'exam_name' => 'required|string|unique:exams,exam_name',
             'passing_marks' => 'required|integer',
             'class' => 'required|string',
         ]);

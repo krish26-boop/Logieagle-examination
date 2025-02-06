@@ -33,7 +33,7 @@ class GradeController extends Controller
         $request->validate([
             'from' => 'required|integer',
             'to' => 'required|integer',
-            'grade' => 'required|string',
+            'grade' => 'required|string|unique:grades,grade',
         ]);
 
         Grade::create($request->all());

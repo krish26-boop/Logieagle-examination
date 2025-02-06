@@ -35,9 +35,16 @@
                 success: function(response) {
                     $('#responseMessage').html('<p>' + response.message + '</p>'); // Show success message
                 },
-                error: function(xhr, status, error) {
-                    var err = xhr.responseJSON;
-                    $('#responseMessage').html('<p>Error: ' + err.message + '</p>'); // Show error message
+                error: function(xhr) {
+                    $('.error').remove();
+                    if (xhr.status === 422) {
+                        const errors = xhr.responseJSON.errors;
+                        $.each(errors, function(field, messages) {
+                            const input = $('[name=' + field + ']');
+                            const errorMessage = $('<span class="error" style="color:red;">' + messages[0] + '</span>');
+                            input.after(errorMessage);
+                        });
+                    }
                 }
             });
         });

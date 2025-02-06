@@ -28,4 +28,13 @@ class Mark extends Model
     {
         return $this->belongsTo(Exam::class);
     }
+
+   // Accessor to get grade
+//    public function getGradeAttribute()
+//    {
+//        return Grade::where('from', '<=', $this->marks)
+//                    ->where('to', '>=', $this->marks)
+//                    ->first()
+//                    ->grade ?? 'N/A'; // Return 'N/A' if no grade found
+//    }
 }
